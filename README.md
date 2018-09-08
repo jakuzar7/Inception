@@ -1,2 +1,2 @@
 # Inception
-Inception - a web browser that will blow your mind
+a web browser that will blow your mind
