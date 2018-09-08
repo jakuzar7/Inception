@@ -5,7 +5,7 @@ const path = require('path')
 const { app, BrowserWindow, Menu } = electron;
 
 
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'production';
 
 let mainWindow;
 
@@ -51,3 +51,22 @@ const mainMenuTemplate = [
         ]
     }
 ];
+
+if (process.env.NODE_ENV !== 'production') {
+    mainMenuTemplate.push({
+        label: 'Developer Tools',
+        submenu: [
+            {
+                label: 'Toggle DevTools',
+                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+                click(item, focusedWindow) {
+                    focusedWindow.toggleDevTools();
+                }
+            },
+            {
+                role: 'reload'
+            }
+        ]
+    })
+
+}
