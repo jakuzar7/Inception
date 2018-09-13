@@ -20,7 +20,7 @@ app.on('ready', () => {
     mainWindow.loadURL(
         url.format(
             {
-                pathname: path.join(__dirname, 'dist/pug.a7a503bb.html'), 
+                pathname: path.join(__dirname, 'dist/pug.03f0838c.html'), 
                 protocol: 'file:',
                 slashes: true
             }));
