@@ -4,4 +4,4 @@ export default () => {
     search.addEventListener('change', e => {
         webview.src = e.target.value
     })
-} 
+}
