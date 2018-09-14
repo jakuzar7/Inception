@@ -62,4 +62,4 @@ typings/
 
 # output of parcel-bundler
 .cache/
-.dist/
+dist/
