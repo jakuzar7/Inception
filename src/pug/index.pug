@@ -1,12 +1,16 @@
 html
     head
-        link(rel="stylesheet", href="../sass/style.sass")
-         
         title Inception
+        link(rel="stylesheet", href="../sass/style.sass")
+        script(src="../js/index.js")
     body
-        button home
-        button refresh
-        button search
-        input(type="text")
+        #toolbar
+            button home
+            button refresh
+            button search
+            input#search(type="text")
+        #webview
+            //- webview to element który dostarcza electron do wyświetlania stron - usuń po przeczytaniu
+            webview(src="https://www.github.com/")
         
         
