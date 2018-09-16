@@ -1,16 +1,25 @@
 html
     head
         title Inception
-        link(rel="stylesheet", href="../sass/style.sass")
+        link(rel="stylesheet", href="../sass/index.sass")
         script(src="../js/index.js")
     body
         #toolbar
-            button home
-            button refresh
-            button search
-            input#search(type="text")
+            #window
+                #bar Inception
+                .btn#minimize
+                .btn#maximize
+                .btn#exit
+            #navigation
+                #logo(src="../../assets/icons/logo.png")
+                button home
+                button refresh
+                button search
+                input#search(type="text")
+            #loading
+                #bar
         #webview
             //- webview to element który dostarcza electron do wyświetlania stron - usuń po przeczytaniu
-            webview(src="https://www.github.com/")
+            webview(src="https://www.duckduckgo.com/")
         
         

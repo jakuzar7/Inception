@@ -1,11 +1,14 @@
 const electron = require('electron')
-const { app, BrowserWindow, Menu } = electron
+const { app, BrowserWindow } = electron
 
-process.env.NODE_ENV = 'development'
 let mainWindow
+let mainWindowConfig = Object.freeze({
+    show: false,
+    frame: false
+})
 
 app.on('ready', () => {
-    mainWindow = new BrowserWindow({show: false})
+    mainWindow = new BrowserWindow(mainWindowConfig)
     mainWindow.loadURL('file://' + __dirname + '/dist/index.html')
     mainWindow.on('closed', () => {
         app.quit()
@@ -14,42 +17,30 @@ app.on('ready', () => {
     mainWindow.once('ready-to-show', () => {
         mainWindow.show()
     })
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate)
-    Menu.setApplicationMenu(mainMenu)
+    mainWindow.setMenu(null)
+    devMode(mainWindow)
 })
 
-// TODO: pozbędziemy się ramki windowsowej (i cross platformowej)
-// na rzecz naszej własnej ramki, którą zrobimy potem
-const mainMenuTemplate = [
-    {
-        label: 'File',
-        submenu: [
-            {
-                label: 'Quit',
-                accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
-                click() {
-                    app.quit()
-                }
-            }
-        ]
+/**
+ * This function checks if you are running electron
+ * in emulator. If so, it turnes developnment mode on.
+ * @param {BrowserWindow} mainWindow - the window object
+ */
+function devMode (window) {
+    // Import global key listener
+    const keys = electron.globalShortcut
+    // Check if it's development
+    if (process.argv.includes('--dev'))
+        process.DEV = true
+    else
+        process.DEV = false
+    // Register bindings to devTools and reload
+    if (process.DEV) {
+        keys.register('f5', () => {
+            window.reload()
+        })
+        keys.register('f1', () => {
+            window.openDevTools()
+        })
     }
-]
-
-if (process.env.NODE_ENV !== 'production') {
-    mainMenuTemplate.push({
-        label: 'Developer Tools',
-        submenu: [
-            {
-                label: 'Toggle DevTools',
-                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
-                click(item, focusedWindow) {
-                    focusedWindow.toggleDevTools()
-                }
-            },
-            {
-                role: 'reload'
-            }
-        ]
-    })
-
 }
