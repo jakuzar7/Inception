@@ -54,5 +54,8 @@ function preloadCSS (webview) {
                 background-color: #333;
                 border-radius: 10px;
             }
+            ::-webkit-scrollbar-corner {
+                background-color: #222;
+               }
         `)
 }
