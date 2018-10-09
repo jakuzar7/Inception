@@ -2,9 +2,9 @@
 export default (electron) => {
     let win = electron.remote.getCurrentWindow()
     let buttons = {
-        min : document.querySelector('#window #minimize'),
-        max : document.querySelector('#window #maximize'),
-        ext : document.querySelector('#window #exit')
+        min : document.querySelector('#toolbar #minimize'),
+        max : document.querySelector('#toolbar #maximize'),
+        ext : document.querySelector('#toolbar #exit')
     }
     // Minimalize Window
     buttons.min.onclick = () => {

@@ -2,21 +2,19 @@ html
     head
         title Inception
         link(rel="stylesheet", href="../sass/index.sass")
+        a(href="failed_loading_page.pug", style="display:none")
         script(src="../js/index.js")
     body
-        #toolbar
-            #window
-                #bar Inception
-                .btn#minimize
-                .btn#maximize
-                .btn#exit
+        #toolbar 
             #navigation
                 #logo(src="../../assets/icons/logo.png") 
                 input#search(type="text")
+                .win-btn#exit
+                .win-btn#maximize
+                .win-btn#minimize    
             #loading
                 #bar
         #webview
-            //- webview to element który dostarcza electron do wyświetlania stron - usuń po przeczytaniu
             webview(src="https://www.duckduckgo.com/")
         
         
