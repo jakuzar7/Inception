@@ -8,11 +8,14 @@ TO DO:
   - AdBlock P
   - CSS (SASS) Framework J
   - Historia Przeglądania P
+    - Różne opcje czasowe 
+    - Zapisywanie wyłącznie aktualnej sesji przy wyłączonej opcji zapisywania historii
   - Incognito Mode P
   - Last Opened Tabs J
   - Zapisywanie Stron (zakładki) J
   - Drukowanie Stron P
   - Grafika przycisku odświezania P
+  - Zapisywanie danych formularzy P
 
 2. Important:
   - Custom devTools 
@@ -21,6 +24,5 @@ TO DO:
 3. Random:
   - Zakładki 
   - Logika dzielenia okien
-  - Secret *P*remium *H*ome Mode
   
 Disclaimer: Important i Random nie są przypisywane do konkretnych osób, jak zostaną przypisane i zaakceptowane to wrzucamy do Urgent wraz z osobą.
