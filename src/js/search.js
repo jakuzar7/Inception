@@ -2,8 +2,9 @@
 export default () => {
     let search = document.querySelector('#search')
     let webview = document.querySelector('webview')
-    search.addEventListener('change', e => {
-        webview.src = handleInput(e.target.value)
+    search.addEventListener('change', (e) => {
+        webview.src = handleInput(e.target)
+        search.value = webview.getURL()
     })
 
     setLoading(webview)
@@ -68,14 +69,15 @@ function preloadCSS(webview) {
 }
 
 // Handling input
-function handleInput(inputText) {
+function handleInput(target) {
     
+    let inputText = target.value 
+
     console.log(inputText + " #1")
     // Search for dot, to check if it is a adress
     if (!inputText.includes('.')) {
-        // Search it in google
-            inputText = 'https://www.google.com/search?q=' + inputText
-        
+        //inputText = 'https://www.google.com/search?q=' + inputText
+        inputText = 'https://duckduckgo.com/?q=' + inputText
     }
     else {
         // Search for and add "https://"
