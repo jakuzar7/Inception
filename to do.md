@@ -1,7 +1,6 @@
 TO DO:
 1. Urgent:
   - Wyszukiwarka & logika paska wyszukiwania J
-    - Pokazywanie aktualnego adresu strony
     - Przycisk odświeżania strony
   - Layout settings'ów J
   - Security J
@@ -22,6 +21,7 @@ TO DO:
   - Podpowiedzi podczas pisania w input?
 
 3. Random:
+  - Tabs surfing
   - Zakładki 
   - Logika dzielenia okien
   

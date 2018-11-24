@@ -1,13 +1,21 @@
+import { setInterval } from "timers";
+import { TIMEOUT } from "dns";
+
 // Website search
 export default () => {
+    let reload = document.querySelector('#reload')
     let search = document.querySelector('#search')
     let webview = document.querySelector('webview')
     search.addEventListener('change', (e) => {
         webview.src = handleInput(e.target)
-        search.value = webview.getURL()
+        webview.addEventListener('did-get-response-details', () => {
+            search.value = webview.getURL()
+        })
+        
     })
 
     setLoading(webview)
+    reloadAnim(reload, webview)
 }
 
 /**
@@ -88,3 +96,36 @@ function handleInput(target) {
     console.log(inputText + " #2")
     return inputText
 }
+
+function reloadAnim(reload, webview) {
+    reload.addEventListener('click', () => {
+        rotateAnim()
+        setInterval(rotateAnim, 5000)
+        webview.reload()
+    })
+}
+
+function rotateAnim(){
+    let rel = document.querySelector('#reload')
+    rel.style.transform = 'rotate(0deg)'
+    setTimeout(() => {
+        rel.style.transform = 'rotate(180deg)'
+        setTimeout(() => {
+            rel.style.transform = 'rotate(361deg)'
+        }, 950);
+    
+    }, 1000);
+}
+
+
+/*@keyframes test
+                0%
+                    transform: rotate(0)
+                    //background-color: $purple-color
+                50%
+                    transform: rotate(180deg)
+                    //background-color: $purple-color - 50
+                100%
+                    transform: rotate(360deg)
+                    //background-color: $purple-color
+                    */
