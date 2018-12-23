@@ -1,5 +1,6 @@
-import { setInterval } from "timers";
-import { TIMEOUT } from "dns";
+import { setInterval } from "timers"
+import { TIMEOUT } from "dns"
+import path from 'path'
 
 // Website search
 export default () => {
@@ -43,31 +44,19 @@ function setLoading(webview) {
         loading.style.width = '100vw'
         loading.style.opacity = 0
         preloadCSS(webview)
-        // if (window.reloading) {
-        //     console.log('clir');
-        //     clearInterval(window.reloading)
-        // }
     })
 
     webview.addEventListener('did-stop-loading', () => {
         loading.style.width = '100vw'
         loading.style.opacity = 0
         preloadCSS(webview)
-        if (window.reloading) {
-            console.log('clir');
-            clearInterval(window.reloading)
-        }
     })
 
     webview.addEventListener('did-fail-load', () => {
-        webview.src = '../dist/failed_loading_page.html'
+        webview.src = '../dist/fail.html'
         loading.style.width = '100vw'
         loading.style.opacity = 0
-        preloadCSS(webview)
-        if (window.reloading) {
-            console.log('clir')
-            clearInterval(window.reloading)
-        }   
+        preloadCSS(webview)   
     })
 
 }
@@ -78,17 +67,22 @@ function setLoading(webview) {
 function preloadCSS(webview) {
     // Custom ScrollBar
     webview.insertCSS(`
-            body::-webkit-scrollbar {
-                background-color: #222;
-            }
-            body::-webkit-scrollbar-thumb {
-                background-color: #333;
-                border-radius: 10px;
-            }
-            ::-webkit-scrollbar-corner {
-                background-color: #222;
-               }
-        `)
+        ::-webkit-scrollbar {
+            width:10px;
+            height:10px;
+        }
+        ::-webkit-scrollbar * {
+            background:transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background:rgba(0,0,0,0.5) !important;
+            border-radius: 20px;
+            transition: 300ms;
+        }
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+    `)
 }
 
 // Handling input
@@ -96,8 +90,10 @@ function handleInput(target) {
     
     let inputText = target.value 
 
-    console.log(inputText + " #1")
     // Search for dot, to check if it is a adress
+    if (inputText == '::fail') {
+        return '../dist/fail.html'
+    }
     if (!inputText.includes('.')) {
         //inputText = 'https://www.google.com/search?q=' + inputText
         inputText = 'https://duckduckgo.com/?q=' + inputText
@@ -108,13 +104,11 @@ function handleInput(target) {
             inputText = 'https://' + inputText
         }
     }
-    console.log(inputText + " #2")
     return inputText
 }
 
 function reloadAnim(reload, webview) {
     setInterval(function kappa () { 
-        rotateAnim(webview)
         let rel = document.querySelector('#reload #load')
         if (webview.isLoading()) {
             window.rot += 360
@@ -124,8 +118,4 @@ function reloadAnim(reload, webview) {
     reload.addEventListener('click', () => {
         webview.reload()
     })
-}
-
-function rotateAnim(webview){
-    
 }
