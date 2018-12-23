@@ -100,32 +100,23 @@ function handleInput(target) {
 function reloadAnim(reload, webview) {
     reload.addEventListener('click', () => {
         rotateAnim()
-        setInterval(rotateAnim, 5000)
+        //setInterval(rotateAnim, 5000)
         webview.reload()
     })
 }
 
 function rotateAnim(){
     let rel = document.querySelector('#reload')
+    if(rel.style.transform == 'rotate(360deg)'){
     rel.style.transform = 'rotate(0deg)'
-    setTimeout(() => {
-        rel.style.transform = 'rotate(180deg)'
-        setTimeout(() => {
-            rel.style.transform = 'rotate(361deg)'
-        }, 950);
-    
-    }, 1000);
+    console.log(rel)
+    }
+    else if(rel.style.transform == 'rotate(0deg)'){
+    console.log("2")
+    rel.style.transform = 'rotate(360deg)'
+    }
+    else
+    console.log("3")
+    rel.style.transform = 'rotate(360deg)'
+    //console.error("rotateAnim style error")
 }
-
-
-/*@keyframes test
-                0%
-                    transform: rotate(0)
-                    //background-color: $purple-color
-                50%
-                    transform: rotate(180deg)
-                    //background-color: $purple-color - 50
-                100%
-                    transform: rotate(360deg)
-                    //background-color: $purple-color
-                    */
