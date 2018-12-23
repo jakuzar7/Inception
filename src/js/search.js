@@ -14,7 +14,7 @@ export default () => {
         })
         
     })
-    window.rot = 180
+    window.rot = 0
     
     setLoading(webview)
     reloadAnim(reload, webview)
@@ -113,17 +113,15 @@ function handleInput(target) {
 }
 
 function reloadAnim(reload, webview) {
+    setInterval(function kappa () { 
+        rotateAnim(webview)
+        let rel = document.querySelector('#reload #load')
+        if (webview.isLoading()) {
+            window.rot += 360
+            rel.style.transform = `rotate(${window.rot}deg)`
+        }
+    }, 600)
     reload.addEventListener('click', () => {
-        setInterval(function kappa () { 
-            rotateAnim(webview)
-            let rel = document.querySelector('#reload')
-            if (webview.isLoading()) {
-                window.rot += 360
-                rel.style.transform = `rotate(${window.rot}deg)`
-                clearInterval(kappa)
-                // clearInterval(kappa)
-            }
-        }, 400)
         webview.reload()
     })
 }
