@@ -19,7 +19,6 @@
             background-position: center
             display: inline-block
             vertical-align: middle
-            transform: translate(0, -1px)
             &::after
                 position: absolute
                 top: 0
@@ -41,7 +40,8 @@
             color: $secondary-color
             background-color: $primary-color + 16
             display: inline-block
-            height: 30px
+            height: 24px
+            margin: 3px
             width: 50vw
             margin-left: 10px
             padding: 0
@@ -51,12 +51,14 @@
             border-top-left-radius: 10px
             border-bottom-left-radius: 10px
             font-family: Lato
+            vertical-align: middle
         #reload
             transition: 300ms
             -webkit-app-region: no-drag
-            width: 30px
-            height: 30px
+            width: 24px
+            height: 24px
             position: relative
+            margin: 3px
             background-size: 80%
             background-position: center
             background-repeat: no-repeat
@@ -65,14 +67,13 @@
             background-color: $primary-color + 16
             border-top-right-radius: 10px
             border-bottom-right-radius: 10px
-            margin-left: -4px
-            transform: translate(0, -1px)
+            margin-left: -8px
             #load
                 transition: 300ms
                 -webkit-app-region: no-drag
                 background-image: url('../../assets/icons/reload.png')
-                width: 30px
-                height: 30px
+                width: 24px
+                height: 24px
                 position: relative
                 background-size: 80%
                 background-position: center
