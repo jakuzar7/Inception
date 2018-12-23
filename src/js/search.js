@@ -6,6 +6,7 @@ export default () => {
     let reload = document.querySelector('#reload')
     let search = document.querySelector('#search')
     let webview = document.querySelector('webview')
+    
     search.addEventListener('change', (e) => {
         webview.src = handleInput(e.target)
         webview.addEventListener('did-get-response-details', () => {
@@ -13,9 +14,11 @@ export default () => {
         })
         
     })
-
+    window.rot = 180
+    
     setLoading(webview)
     reloadAnim(reload, webview)
+
 }
 
 /**
@@ -40,12 +43,20 @@ function setLoading(webview) {
         loading.style.width = '100vw'
         loading.style.opacity = 0
         preloadCSS(webview)
+        // if (window.reloading) {
+        //     console.log('clir');
+        //     clearInterval(window.reloading)
+        // }
     })
 
     webview.addEventListener('did-stop-loading', () => {
         loading.style.width = '100vw'
         loading.style.opacity = 0
         preloadCSS(webview)
+        if (window.reloading) {
+            console.log('clir');
+            clearInterval(window.reloading)
+        }
     })
 
     webview.addEventListener('did-fail-load', () => {
@@ -53,6 +64,10 @@ function setLoading(webview) {
         loading.style.width = '100vw'
         loading.style.opacity = 0
         preloadCSS(webview)
+        if (window.reloading) {
+            console.log('clir')
+            clearInterval(window.reloading)
+        }   
     })
 
 }
@@ -99,24 +114,20 @@ function handleInput(target) {
 
 function reloadAnim(reload, webview) {
     reload.addEventListener('click', () => {
-        rotateAnim()
-        //setInterval(rotateAnim, 5000)
+        setInterval(function kappa () { 
+            rotateAnim(webview)
+            let rel = document.querySelector('#reload')
+            if (webview.isLoading()) {
+                window.rot += 360
+                rel.style.transform = `rotate(${window.rot}deg)`
+                clearInterval(kappa)
+                // clearInterval(kappa)
+            }
+        }, 400)
         webview.reload()
     })
 }
 
-function rotateAnim(){
-    let rel = document.querySelector('#reload')
-    if(rel.style.transform == 'rotate(360deg)'){
-    rel.style.transform = 'rotate(0deg)'
-    console.log(rel)
-    }
-    else if(rel.style.transform == 'rotate(0deg)'){
-    console.log("2")
-    rel.style.transform = 'rotate(360deg)'
-    }
-    else
-    console.log("3")
-    rel.style.transform = 'rotate(360deg)'
-    //console.error("rotateAnim style error")
+function rotateAnim(webview){
+    
 }
