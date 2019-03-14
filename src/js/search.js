@@ -1,17 +1,21 @@
-import { setInterval } from "timers"
-import { TIMEOUT } from "dns"
-import path from 'path'
+import { setInterval } from 'timers'
 
 // Website search
 export default () => {
     let reload = document.querySelector('#reload')
     let search = document.querySelector('#search')
     let webview = document.querySelector('webview')
+    let gotUrl = 0
     
     search.addEventListener('change', (e) => {
+        gotUrl = 0
+        
         webview.src = handleInput(e.target)
-        webview.addEventListener('did-get-response-details', () => {
-            search.value = webview.getURL()
+        webview.addEventListener('did-get-response-details', (e) => {
+            
+            if (gotUrl < 5)
+                search.value = webview.getURL()
+            gotUrl++
         })
         
     })
@@ -53,6 +57,7 @@ function setLoading(webview) {
     })
 
     webview.addEventListener('did-fail-load', () => {
+        console.log(search.value.match(/^(https:).*/))
         webview.src = '../dist/fail.html'
         loading.style.width = '100vw'
         loading.style.opacity = 0

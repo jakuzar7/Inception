@@ -63,3 +63,5 @@ typings/
 # output of parcel-bundler
 .cache/
 dist/
+# builds
+release-builds/
