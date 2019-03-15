@@ -1,4 +1,5 @@
 import { setInterval } from 'timers'
+import tabs from './tabs';
 
 // Website search
 export default () => {
@@ -23,7 +24,6 @@ export default () => {
     
     setLoading(webview)
     reloadAnim(reload, webview)
-
 }
 
 /**
@@ -48,6 +48,7 @@ function setLoading(webview) {
         loading.style.width = '100vw'
         loading.style.opacity = 0
         preloadCSS(webview)
+        tabs()
     })
 
     webview.addEventListener('did-stop-loading', () => {
